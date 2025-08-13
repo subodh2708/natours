@@ -17,7 +17,8 @@
   },
   "homepage": "https://github.com/subodh2708/natours#readme",
   "dependencies": {
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "morgan": "^1.10.1"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"

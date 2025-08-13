@@ -1,7 +1,10 @@
 const fs = require('fs');
 const express = require('express');
+const morgan = require('morgan');
 
 const app = express();
+
+app.use(morgan('dev'));
 
 app.use(express.json());
 
@@ -21,14 +24,12 @@ app.use((req, res, next) => {
 
 const getAllTour = (req, res) => {
   console.log(req.requestedTime);
-  res
-    .status(200)
-    .json({
-      status: 'success',
-      requestedAt: req.requestedTime,
-      result: tours.length,
-      data: { tours },
-    });
+  res.status(200).json({
+    status: 'success',
+    requestedAt: req.requestedTime,
+    result: tours.length,
+    data: { tours },
+  });
 };
 
 const getTour = (req, res) => {
