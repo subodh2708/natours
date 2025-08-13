@@ -4,7 +4,8 @@
   "description": "learning node, express, and mongoDB",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start:dev": "cross-env NODE_ENV=development nodemon server.js",
+    "start:prod": "cross-env NODE_ENV=production nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -17,10 +18,12 @@
   },
   "homepage": "https://github.com/subodh2708/natours#readme",
   "dependencies": {
+    "dotenv": "^17.2.1",
     "express": "^4.21.2",
     "morgan": "^1.10.1"
   },
   "devDependencies": {
+    "cross-env": "^10.0.0",
     "nodemon": "^3.1.10"
   }
 }
