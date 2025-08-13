@@ -9,10 +9,26 @@ const tours = JSON.parse(
   fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`)
 );
 
+app.use((req, res, next) => {
+  console.log('Hello from the middleware👋');
+  next();
+});
+
+app.use((req, res, next) => {
+  req.requestedTime = new Date().toISOString();
+  next();
+});
+
 const getAllTour = (req, res) => {
+  console.log(req.requestedTime);
   res
     .status(200)
-    .json({ status: 'success', result: tours.length, data: { tours } });
+    .json({
+      status: 'success',
+      requestedAt: req.requestedTime,
+      result: tours.length,
+      data: { tours },
+    });
 };
 
 const getTour = (req, res) => {
@@ -64,6 +80,7 @@ const deleteTour = (req, res) => {
 // app.delete('/api/v1/tours/:id', deleteTour);
 
 app.route('/api/v1/tours').get(getAllTour).post(createNewTour);
+
 app
   .route('/api/v1/tours/:id')
   .get(getTour)
