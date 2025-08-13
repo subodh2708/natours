@@ -4,6 +4,7 @@ const morgan = require('morgan');
 
 const app = express();
 
+//Middleware
 app.use(morgan('dev'));
 
 app.use(express.json());
@@ -22,6 +23,9 @@ app.use((req, res, next) => {
   next();
 });
 
+//Route Handling
+
+//Tours
 const getAllTour = (req, res) => {
   console.log(req.requestedTime);
   res.status(200).json({
@@ -74,19 +78,55 @@ const deleteTour = (req, res) => {
   res.status(204).json({ status: 'success', data: null });
 };
 
-// app.get('/api/v1/tours', getAllTour);
-// app.post('/api/v1/tours', createNewTour);
-// app.get('/api/v1/tours/:id', getTour);
-// app.patch('/api/v1/tours/:id', updateTour);
-// app.delete('/api/v1/tours/:id', deleteTour);
+//////////////////////////////////////////////////////////
 
-app.route('/api/v1/tours').get(getAllTour).post(createNewTour);
+//Users
 
-app
-  .route('/api/v1/tours/:id')
-  .get(getTour)
-  .patch(updateTour)
-  .delete(deleteTour);
+const getAllUsers = (req, res) => {
+  res
+    .status(500)
+    .json({ status: 'Error', message: 'This route is not yet defined' });
+};
+
+const createUser = (req, res) => {
+  res
+    .status(500)
+    .json({ status: 'Error', message: 'This route is not yet defined' });
+};
+
+const getUser = (req, res) => {
+  res
+    .status(500)
+    .json({ status: 'Error', message: 'This route is not yet defined' });
+};
+const updateUser = (req, res) => {
+  res
+    .status(500)
+    .json({ status: 'Error', message: 'This route is not yet defined' });
+};
+const deleteUser = (req, res) => {
+  res
+    .status(500)
+    .json({ status: 'Error', message: 'This route is not yet defined' });
+};
+
+//Routes
+
+const tourRouter = express.Router();
+const usersRouter = express.Router();
+
+tourRouter.route('/').get(getAllTour).post(createNewTour);
+
+tourRouter.route('/:id').get(getTour).patch(updateTour).delete(deleteTour);
+
+usersRouter.route('/').get(getAllUsers).post(createUser);
+
+usersRouter.route('/:id').get(getUser).patch(updateUser).delete(deleteUser);
+
+app.use('/api/v1/tours', tourRouter);
+app.use('/api/v1/users', usersRouter);
+
+//start server
 
 const port = 3000;
 app.listen(port, () => {
